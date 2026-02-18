@@ -23,14 +23,24 @@ if (!global.mongoose) {
 
 async function connectDB() {
   if (cached.conn) {
-    return cached.conn;
+    // Check if connection is actually alive
+    if (cached.conn.connection.readyState === 1) {
+      return cached.conn;
+    }
+    console.log('Cached connection found but not ready. Reconnecting...');
+    cached.promise = null;
   }
 
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
+      maxPoolSize: 10, // Limit pool size for serverless
+      serverSelectionTimeoutMS: 5000, // Fail fast if DB is down
+      socketTimeoutMS: 45000, // Close sockets after inactivity
     };
+    
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
+      console.log('New MongoDB connection established');
       return mongoose;
     });
   }

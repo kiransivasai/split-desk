@@ -12,7 +12,7 @@ const GroupSchema = new Schema({
   description:  { type: String },
   emoji:        { type: String, default: '💼' },
   type:         { type: String, enum: ['trip', 'home', 'team', 'event', 'other'], default: 'team' },
-  inviteCode:   { type: String, unique: true, default: generateInviteCode },
+  inviteCode:   { type: String, unique: true, default: generateInviteCode }, // unique: true creates an index
   simplifyDebts: { type: Boolean, default: true },
   createdBy:    { type: Schema.Types.ObjectId, ref: 'User', required: true },
   members: [{
@@ -32,6 +32,6 @@ const GroupSchema = new Schema({
 
 GroupSchema.index({ 'members.userId': 1 });
 GroupSchema.index({ createdBy: 1 });
-GroupSchema.index({ inviteCode: 1 });
+// inviteCode index is created by unique: true option above
 
 export default models.Group || mongoose.model('Group', GroupSchema);

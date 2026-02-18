@@ -25,6 +25,6 @@ const UserSchema = new Schema({
   isActive:   { type: Boolean, default: true },
 }, { timestamps: true });
 
-UserSchema.index({ email: 1 });
+// email index is created by unique: true option above
 
 export default models.User || mongoose.model('User', UserSchema);
