@@ -176,27 +176,6 @@ export default function LoginPage() {
               </button>
             </div>
 
-            {isLogin && (
-              <div className="mt-5 pt-5 border-t border-border">
-                <p className="text-[11px] text-t3 text-center mb-3">DEMO ACCOUNTS</p>
-                <div className="space-y-1.5">
-                  {[
-                    { e: 'alex@splitdesk.com', n: 'Alex (Admin)' },
-                    { e: 'sarah@splitdesk.com', n: 'Sarah' },
-                    { e: 'james@splitdesk.com', n: 'James' },
-                  ].map((d) => (
-                    <button
-                      key={d.e}
-                      onClick={() => { setEmail(d.e); setPassword('password123'); }}
-                      className="w-full text-left text-xs text-t2 hover:text-accent transition-colors px-3 py-2 rounded-r bg-c2/50 hover:bg-accent-dim border border-transparent hover:border-accent/20"
-                    >
-                      <span className="font-semibold">{d.n}</span>
-                      <span className="text-t3 ml-2">{d.e}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
         </div>
       </div>
