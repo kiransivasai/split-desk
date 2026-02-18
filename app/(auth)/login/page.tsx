@@ -118,7 +118,7 @@ export default function LoginPage() {
                   <input
                     type="text"
                     className="input"
-                    placeholder="Alex Morgan"
+                    placeholder="John Doe"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required={!isLogin}
